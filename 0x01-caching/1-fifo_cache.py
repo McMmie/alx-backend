@@ -21,7 +21,9 @@ class FIFOCache(BaseCaching):
         """
         if key and item:
 
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+            self.cache_data[key] = item
+
+            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
 
                 for index, value in enumerate(self.cache_data.keys()):
 
@@ -31,7 +33,6 @@ class FIFOCache(BaseCaching):
                 print(f'DISCARDED: {discarded}')
                 self.cache_data.pop(discarded)
 
-            self.cache_data[key] = item
 
     def get(self, key):
         """
